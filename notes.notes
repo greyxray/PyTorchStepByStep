@@ -1,0 +1,6 @@
+# To work
+
+[sh]
+set_conda
+conda activate pytorch_env
+[end]
