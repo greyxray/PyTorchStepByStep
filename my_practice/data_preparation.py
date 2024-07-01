@@ -2,7 +2,7 @@
 prepare data that is in the memmory
 """
 import torch
-from generate_data import *
+# from generate_data import x, y
 
 # define available device
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
@@ -28,5 +28,14 @@ train_loader = torch.utils.data.DataLoader(
     shuffle=True,
     drop_last=False,  # what to do with incomplete batch
 )
+
+val_loader = torch.utils.data.DataLoader(
+    dataset=val_dataset,
+    batch_size=16,
+    shuffle=True,
+    drop_last=False,  # what to do with incomplete batch
+)
+
+# test_variable=10
 
 print(f'Done {__file__.__repr__()}')

@@ -3,6 +3,7 @@ configure what's needed before training loop
 """
 import torch
 import numpy as np
+from utils import get_one_training_step_fn, get_one_val_step_fn
 
 # define device
 device = 'cude' if torch.cuda.is_available() else 'cpu'
@@ -24,7 +25,8 @@ optimizer = torch.optim.SGD(model.parameters(), lr=lr)
 loss_fn = torch.nn.MSELoss(reduction='mean')
 
 # Define a fn that does 1 step in the training
-from utils import get_one_training_step_fn
+
 one_training_step_fn = get_one_training_step_fn(model, loss_fn, optimizer)
+one_val_step_fn = get_one_val_step_fn(model, loss_fn)
 
 print(f"Done {__file__.__repr__()}")
