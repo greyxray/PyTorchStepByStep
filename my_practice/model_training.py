@@ -2,24 +2,12 @@
 training loop
 """
 
-epoch = 100
+epoch = 1000
+losses = []
 
 for e in range(epoch):
-    # set model to train mode
-    model.train()
-
-    # pred
-    y_pred_tensor = model(x_train_tensor)
-
-    # loss -> number?
-    loss = loss_fn(y_pred_tensor, y_train_tensor)
-
-    # loss backprop
-    loss.backward()
-
-    # update parameters
-    optimizer.step()
-    optimizer.zero_grad()
+    loss = one_training_step_fn(x_train_tensor, y_train_tensor)
+    losses.append(loss)
 
 
 print(f"Done {__file__.__repr__()}")

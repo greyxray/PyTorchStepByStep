@@ -23,4 +23,9 @@ optimizer = torch.optim.SGD(model.parameters(), lr=lr)
 # define loss function to minimise
 loss_fn = torch.nn.MSELoss(reduction='mean')
 
+# Define a fn that does 1 step in the training
+from utils import get_one_training_step_fn
+one_training_step_fn = get_one_training_step_fn(model, loss_fn, optimizer)
+
+
 print(f"Done {__file__.__repr__()}")
