@@ -27,5 +27,4 @@ loss_fn = torch.nn.MSELoss(reduction='mean')
 from utils import get_one_training_step_fn
 one_training_step_fn = get_one_training_step_fn(model, loss_fn, optimizer)
 
-
 print(f"Done {__file__.__repr__()}")
