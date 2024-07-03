@@ -1,14 +1,14 @@
 import numpy as np
 
 # Generate datapoints
-np.random.seed(43)
+np.random.seed(42)
 
-N = 1000
+N = 100
 
 true_w, true_b = 2, 1
-
-epsion = 0.1 * np.random.rand(N,1)  # noise
+epsilon = (.1 * np.random.randn(N, 1))
+# epsilon = 0.1 * np.random.rand(N,1)  # noise
 x = np.random.rand(N, 1) # matrix [N, 1]
-y = true_w * x + true_b + epsion # y true
+y = true_b + true_w * x + epsilon # y true
 
 print(f"Done {__file__.__repr__()}")

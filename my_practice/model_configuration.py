@@ -3,6 +3,8 @@ configure what's needed before training loop
 """
 import torch
 import numpy as np
+from torch.utils.tensorboard import SummaryWriter
+
 from utils import get_one_training_step_fn, get_one_val_step_fn
 
 # define device
@@ -12,7 +14,7 @@ device = 'cude' if torch.cuda.is_available() else 'cpu'
 lr = 0.1
 
 # fix seeds
-np.random.seed(42)
+# np.random.seed(42)
 torch.manual_seed(42)
 
 # define model
@@ -25,8 +27,19 @@ optimizer = torch.optim.SGD(model.parameters(), lr=lr)
 loss_fn = torch.nn.MSELoss(reduction='mean')
 
 # Define a fn that does 1 step in the training
-
 one_training_step_fn = get_one_training_step_fn(model, loss_fn, optimizer)
 one_val_step_fn = get_one_val_step_fn(model, loss_fn)
+
+
+def get_tensorboard_writer(model, data_loader):
+    # Tensorboard writer setup
+    writer = SummaryWriter("runs/simple_linear_regression")
+    # Add DAG
+    dummy_x, _ = next(iter(data_loader))
+    writer.add_graph(model, dummy_x.to(device))
+
+    return writer
+writer = get_tensorboard_writer(model, train_loader)
+
 
 print(f"Done {__file__.__repr__()}")
