@@ -8,8 +8,8 @@ import torch
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 # convert x/y data to pytorch tensors BUT dont send to device
-x_tensor = torch.as_tensor(x).float()
-y_tensor = torch.as_tensor(y).float()
+x_tensor = torch.from_numpy(x).float()
+y_tensor = torch.from_numpy(y).float()
 
 # Define dataset and dataloader for training
 dataset = torch.utils.data.TensorDataset(x_tensor, y_tensor)
@@ -32,8 +32,8 @@ train_loader = torch.utils.data.DataLoader(
 val_loader = torch.utils.data.DataLoader(
     dataset=val_dataset,
     batch_size=16,
-    shuffle=True,
-    drop_last=False,  # what to do with incomplete batch
+    # shuffle=True,
+    # drop_last=False,  # what to do with incomplete batch
 )
 
 # test_variable=10

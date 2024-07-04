@@ -31,15 +31,16 @@ one_training_step_fn = get_one_training_step_fn(model, loss_fn, optimizer)
 one_val_step_fn = get_one_val_step_fn(model, loss_fn)
 
 
-def get_tensorboard_writer(model, data_loader):
+def get_tensorboard_writer(model, data_loader, experiment_name):
     # Tensorboard writer setup
-    writer = SummaryWriter("runs/simple_linear_regression")
+    print(f"Will log experiment to {experiment_name}")
+    writer = SummaryWriter(f"runs/{experiment_name}")
     # Add DAG
     dummy_x, _ = next(iter(data_loader))
     writer.add_graph(model, dummy_x.to(device))
 
     return writer
-writer = get_tensorboard_writer(model, train_loader)
+writer = get_tensorboard_writer(model, train_loader, experiment_name="simple_linear_regression")
 
 
 print(f"Done {__file__.__repr__()}")

@@ -1,4 +1,5 @@
 import torch
+import numpy as np
 from typing import Callable
 
 def get_one_training_step_fn(model, loss_fn: Callable, optimizer) -> Callable:
