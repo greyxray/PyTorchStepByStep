@@ -4,6 +4,8 @@ prepare data that is in the memmory
 import torch
 # from generate_data import x, y
 
+torch.manual_seed(13)  # Yes, this makes a difference
+
 # define available device
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
@@ -32,7 +34,7 @@ train_loader = torch.utils.data.DataLoader(
 val_loader = torch.utils.data.DataLoader(
     dataset=val_dataset,
     batch_size=16,
-    # shuffle=True,
+    # shuffle=True, # do not use shuffle for reproducibility
     # drop_last=False,  # what to do with incomplete batch
 )
 
